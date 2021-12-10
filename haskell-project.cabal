@@ -27,6 +27,7 @@ library
   exposed-modules:
       Fetch
       Lib
+      Parse
   other-modules:
       Paths_haskell_project
   hs-source-dirs:
