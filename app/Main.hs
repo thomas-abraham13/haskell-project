@@ -3,7 +3,7 @@ module Main where
 import System.IO
 import Lib
 --import Types
---import Fetch
+import Fetch
 --import Parse
 --import Database
 
@@ -36,9 +36,10 @@ main = do
             print "                        "
 
         1 -> do
-            print "-----------------------------------"
-            print "  NATIONAL BASKETBALL ASSOCIATION  "
-            print "-----------------------------------"
+            let url = "https://www.balldontlie.io/api/v1/stats.json"
+            print "      Downloading Player Data      "
+            json <- download url
+            print "           Parsing Data            "
             main
 
         2 -> do
