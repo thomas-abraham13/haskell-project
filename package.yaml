@@ -2,9 +2,9 @@ name:                haskell-project
 version:             0.1.0.0
 github:              "githubuser/haskell-project"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2021 Author name here"
+author:              "Bruno Filipe Xie Xu, Gokul Premkumar & Thomas Abraham"
+maintainer:          "t.abraham@se21.qmul.ac.uk"
+copyright:           "2021 Bruno Filipe Xie Xu, Gokul Premkumar & Thomas Abraham"
 
 extra-source-files:
 - README.md
@@ -21,6 +21,10 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- http-conduit
+- sqlite-simple
+- bytestring
+- aeson
 
 library:
   source-dirs: src
