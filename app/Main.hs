@@ -12,6 +12,7 @@ main = do
     putStrLn "                                   "
     putStrLn "-----------------------------------"
     putStrLn "  NATIONAL BASKETBALL ASSOCIATION  "
+    putStrLn "            PLAYER DATA            "
     putStrLn "-----------------------------------"
     putStrLn "                                   "
     putStrLn "   (1) - Download Player Data      "
@@ -24,8 +25,13 @@ main = do
     putStr "Enter Choice : "
     option <- readLn :: IO Int
     case option of
-        0 -> print " Application Terminated "
-             --print "       Thank You        "
+        0 -> do
+             print "                        "
+             print "------------------------"
+             print " Application Terminated "
+             print "       Thank You        "
+             print "------------------------"
+             print "                        "
 
         otherwise -> do 
                      print " Invalid Option " 
