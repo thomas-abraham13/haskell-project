@@ -22,8 +22,9 @@ main = do
     putStrLn "                                   "
     --conn <- initialiseDB
     hSetBuffering stdout NoBuffering
-    putStr "Enter Choice : "
+    putStr " Enter Choice : "
     option <- readLn :: IO Int
+    putStrLn " "
     case option of
         0 -> do
              print "                        "
@@ -34,5 +35,7 @@ main = do
              print "                        "
 
         otherwise -> do 
-                     print " Invalid Option " 
+                     print "                        "
+                     print "     Invalid Option     "
+                     print "                        "
                      main
