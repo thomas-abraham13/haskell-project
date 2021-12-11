@@ -6,6 +6,14 @@ module Parse (
 import Data.Aeson
 import qualified Data.ByteString.Lazy.Char8 as T
 
+--renameFields "date" = "dateRep"
+renameFields "record_id" = "id"
+renameFields "assists" = "ast"
+renameFields "blocks" = "blk"
+renameFields "points" = "pts"
+renameFields "rebounds" = "reb"
+renameFields "steals" = "stl"
+renameFields "turnovers" = "turnover"
 renameFields other = other
 
 customOptions = defaultOptions {
