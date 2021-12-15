@@ -40,12 +40,12 @@ main = do
             print "      Downloading Player Data      "
             json <- download url
             print "           Parsing Data            "
-            --case (parseRecords json) of
-            --    Left err -> print err
-            --    Right recs -> do
-            --        print "         Saving on Database        "
+            case (parseRecords json) of
+                Left err -> print err
+                Right recs -> do
+                    print "         Saving on Database        "
             --        saveRecords conn (records recs)
-            --        print "             Data Saved            "
+                    print "             Data Saved            "
             main
 
         2 -> do

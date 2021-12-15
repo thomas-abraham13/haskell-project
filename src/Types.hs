@@ -4,7 +4,8 @@ module Types (
     PlayerStats (..),
     Game (..),
     Player (..),
-    Team (..)
+    Team (..),
+    Records (..)
 ) where
 
 import GHC.Generics
@@ -29,7 +30,7 @@ data PlayerStats = PlayerStats {
     reb :: Int,
     stl :: Int,
     turnover :: Int
-} deriving (Show)
+} deriving (Show,Generic)
 
 data Game = Game {
     game_id :: Int,
@@ -60,4 +61,8 @@ data Team = Team {
     division :: String,
     full_name :: String,
     name :: String
+} deriving (Show, Generic)
+
+data Records = Records {
+    data1 :: [PlayerStats]
 } deriving (Show, Generic)
