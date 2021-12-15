@@ -1,7 +1,5 @@
-{-# LANGUAGE DeriveGeneric #-}
-
 module Parse (
---    parseRecords,
+    parseRecords
 ) where
 
 import Types
@@ -22,10 +20,10 @@ customOptions = defaultOptions {
     fieldLabelModifier = renameFields
 }
 
---instance FromJSON Record where
---    parseJSON = genericParseJSON customOptions
+instance FromJSON Player where
+    parseJSON = genericParseJSON customOptions
 
---instance FromJSON Read
+instance FromJSON Team
 
---parseRecords :: T.ByteString -> Either String Records
---parseRecords json = eitherDecode json :: Either String Records
+parseRecords :: T.ByteString -> Either String Team
+parseRecords json = eitherDecode json :: Either String Team
