@@ -12,24 +12,24 @@ import GHC.Generics
 
 data PlayerStats = PlayerStats {
     stats_id :: Int,
-    ast :: Int,
-    blk :: Int,
-    dreb :: Int,
-    fg3_pct :: Float,
-    fg3a :: Int,
-    fg3m :: Int,
-    fg_pct :: Float,
-    fga :: Int,
-    fgm :: Int,
-    ft_pct :: Float,
-    fta :: Int,
-    ftm :: Int,
-    oreb :: Int,
-    pf :: Int,
-    pts :: Int,
-    reb :: Int,
-    stl :: Int,
-    turnover :: Int
+    ast :: Maybe Int,
+    blk :: Maybe Int,
+    dreb :: Maybe Int,
+    fg3_pct :: Maybe Float,
+    fg3a :: Maybe Int,
+    fg3m :: Maybe Int,
+    fg_pct :: Maybe Float,
+    fga :: Maybe Int,
+    fgm :: Maybe Int,
+    ft_pct :: Maybe Float,
+    fta :: Maybe Int,
+    ftm :: Maybe Int,
+    oreb :: Maybe Int,
+    pf :: Maybe Int,
+    pts :: Maybe Int,
+    reb :: Maybe Int,
+    stl :: Maybe Int,
+    turnover :: Maybe Int
 } deriving (Show,Generic)
 
 data Game = Game {
