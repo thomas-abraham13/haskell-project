@@ -14,11 +14,12 @@ import qualified Data.ByteString.Lazy.Char8 as T
 --renameFields "full_name" = "full_name"
 --renameFields "name" = "name"
 
+renameFields "data1" = "data"
 renameFields "stats_id" = "id"
 renameFields "ast" = "ast"
 renameFields "blk" = "blk"
 renameFields "dreb" = "dreb"
-renameFields "fgt3_pct" = "fgt3_pct"
+renameFields "fg3_pct" = "fg3_pct"
 renameFields "fg3a" = "fg3a"
 renameFields "fg3m" = "fg3m"
 renameFields "fg_pct" = "fg_pct"
@@ -42,7 +43,9 @@ customOptions = defaultOptions {
 instance FromJSON PlayerStats where
     parseJSON = genericParseJSON customOptions
 
-instance FromJSON Records
+instance FromJSON Data where
+    parseJSON = genericParseJSON customOptions
 
-parseRecords :: T.ByteString -> Either String Records
-parseRecords json = eitherDecode json :: Either String Records
+
+parseRecords :: T.ByteString -> Either String Data
+parseRecords json = eitherDecode json :: Either String Data

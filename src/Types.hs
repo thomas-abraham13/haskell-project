@@ -5,7 +5,7 @@ module Types (
     Game (..),
     Player (..),
     Team (..),
-    Records (..)
+    Data (..)
 ) where
 
 import GHC.Generics
@@ -15,7 +15,7 @@ data PlayerStats = PlayerStats {
     ast :: Int,
     blk :: Int,
     dreb :: Int,
-    fgt3_pct :: Float,
+    fg3_pct :: Float,
     fg3a :: Int,
     fg3m :: Int,
     fg_pct :: Float,
@@ -63,6 +63,6 @@ data Team = Team {
     name :: String
 } deriving (Show, Generic)
 
-data Records = Records {
+data Data = Data {
     data1 :: [PlayerStats]
 } deriving (Show, Generic)
