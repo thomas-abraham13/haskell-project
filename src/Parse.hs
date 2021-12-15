@@ -1,8 +1,10 @@
+{-# LANGUAGE DeriveGeneric #-}
+
 module Parse (
 --    parseRecords,
 ) where
 
---import Types
+import Types
 import Data.Aeson
 import qualified Data.ByteString.Lazy.Char8 as T
 
