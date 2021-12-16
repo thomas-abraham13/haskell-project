@@ -10,6 +10,7 @@ import Parse
 main :: IO ()
 main = do
     putStrLn "                                   "
+    putStrLn "                                   "
     putStrLn "-----------------------------------"
     putStrLn "  NATIONAL BASKETBALL ASSOCIATION  "
     putStrLn "            PLAYER DATA            "
@@ -17,6 +18,8 @@ main = do
     putStrLn "                                   "
     putStrLn "   (1) - Download Player Data      "
     putStrLn "   (2) - Application Information   "
+    putStrLn "   (3) - All Entries By Player     "
+    putStrLn "   (4) - Total Statistics By Player"
     putStrLn "   (0) - Exit Application          "
     putStrLn "                                   "
     putStrLn "-----------------------------------"
@@ -51,8 +54,21 @@ main = do
         2 -> do
             print "-----------------------------------"
             print "  NATIONAL BASKETBALL ASSOCIATION  "
+            print "            PLAYER DATA            "
             print "-----------------------------------"
             --conn <- someFunc
+            main
+
+        3 -> do
+            print "-----------------------------------"
+            print "         PLAYER STATISTICS         "
+            print "-----------------------------------"
+            main
+
+        4 -> do
+            print "-----------------------------------"
+            print "         TOTAL PLAYER DATA         "
+            print "-----------------------------------"
             main
 
         otherwise -> do 
