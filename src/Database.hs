@@ -3,6 +3,7 @@
 -- or, on GHCI:
 -- > :set -XOverloadedStrings
 
+-- |Module Database that contains functions that operate on the database pokemonDatabase.sqlite
 module Database (
     initialiseDB,
     savePokemonInfo,
@@ -47,6 +48,7 @@ instance ToRow Spawn where
     toRow (Spawn s_id spawn_chance_ avg_spawns_per_10000)
         = toRow (s_id, spawn_chance_, avg_spawns_per_10000)
 
+-- |Method to create the database pokemonDatabase.sqlite
 initialiseDB :: IO Connection
 initialiseDB = do
         conn <- open "pokemonDatabase.sqlite"
@@ -70,6 +72,7 @@ initialiseDB = do
         
         return conn
 
+-- |Method which inserts Candy into table
 getOrCreateCandy :: Connection -> String -> IO Candy
 getOrCreateCandy conn candy = do
     results <- queryNamed conn "SELECT * FROM candies WHERE candyType=:candy" [":candy" := candy]    
@@ -79,6 +82,7 @@ getOrCreateCandy conn candy = do
         execute conn "INSERT INTO candies (candyType) VALUES (?)" (Only (candy))
         getOrCreateCandy conn candy
 
+-- |Method which inserts spawn rates into table
 getOrCreateSpawn :: Connection -> Float -> Float -> IO Spawn
 getOrCreateSpawn conn spawn_chance avg_spawns = do
     results <- queryNamed conn "SELECT * FROM spawns WHERE spawn_chance=:spawn_chance AND avg_spawns=:avg_spawns" [":spawn_chance" := spawn_chance, ":avg_spawns" := avg_spawns]    
@@ -88,6 +92,7 @@ getOrCreateSpawn conn spawn_chance avg_spawns = do
         execute conn "INSERT INTO spawns (spawn_chance, avg_spawns_per_10000) VALUES (?,?)" (spawn_chance, avg_spawns)
         getOrCreateSpawn conn spawn_chance avg_spawns
 
+-- |Method which inserts variouos pokemon info into table
 createPokemonInfo :: Connection -> Pokemon -> IO ()
 createPokemonInfo conn pokemon = do
     candy <- getOrCreateCandy conn (candy pokemon)
@@ -105,8 +110,7 @@ createPokemonInfo conn pokemon = do
 savePokemonInfo :: Connection -> [Pokemon] -> IO ()
 savePokemonInfo conn = mapM_ (createPokemonInfo conn)
 
-
-
+-- |Method which queries pokemon based on candy name inputted
 queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
 queryCandyAllPokemon conn = do
     putStr "Enter candy name > "
@@ -115,14 +119,17 @@ queryCandyAllPokemon conn = do
     let sql = "SELECT number, name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
     query conn sql [candyName]
 
+-- |Method which prints Pokemon table
 getPokemons :: Connection -> IO [PokemonInfo]
 getPokemons conn = do
     query_ conn "SELECT * FROM pokemonInfo"
 
+-- |Method which prints Candy table
 getCandy :: Connection -> IO [Candy]
 getCandy conn = do
     query_ conn "SELECT * FROM candies"
 
+-- |Method which prints Spawn table
 getSpawn :: Connection -> IO [Spawn]
 getSpawn conn = do
     query_ conn "SELECT * FROM spawns"
