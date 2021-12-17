@@ -33,7 +33,6 @@ data PlayerStats = PlayerStats {
 } deriving (Show,Generic)
 
 data Game = Game {
-    game_id :: Int,
     home_team_id :: Int,
     home_fullname :: String,
     visitor_team_id :: Int,
@@ -56,11 +55,6 @@ data Player = Player {
 data Team = Team {
     team_id :: Int,
     abbreviation :: String,
-    city :: String,
-    conference :: String,
-    division :: String,
-    full_name :: String,
-    name :: String
 } deriving (Show, Generic)
 
 data Data = Data {
