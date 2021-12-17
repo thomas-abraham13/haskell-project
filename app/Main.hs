@@ -17,7 +17,8 @@ main = do
     putStrLn "                                   "
     putStrLn "   (1) - Download Pokemon Data     "
     putStrLn "   (2) - Show All Pokemon          "
-    putStrLn "   (3) - Application Information   "
+    putStrLn "   (3) - Total Candy by Pokemon    "
+    putStrLn "   (4) - Application Information   "
     putStrLn "   (0) - Exit Application          "
     putStrLn "                                   "
     putStrLn "-----------------------------------"
@@ -54,6 +55,10 @@ main = do
             main
 
         3 -> do
+            queryPokemonAllEntries conn
+            main
+
+        4 -> do
             conn <- someFunc
             main
 

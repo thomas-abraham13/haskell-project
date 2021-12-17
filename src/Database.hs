@@ -7,7 +7,8 @@ module Database (
     initialiseDB,
     savePokemonInfo,
     getOrCreateSpawn,
-    queryCandyAllPokemon
+    queryCandyAllPokemon,
+    queryPokemonAllEntries
 ) where
 
 import Types
@@ -108,9 +109,17 @@ savePokemonInfo conn = mapM_ (createPokemonInfo conn)
 
 queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
 queryCandyAllPokemon conn = do
+    putStr " "
     putStr " Enter Name of Candy : "
     candyName <- getLine
     putStrLn $ " Searching for " ++ candyName ++ " Pokemon.... "
+    putStr " "
     let sql = "SELECT name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
     query conn sql [candyName]
 
+queryPokemonAllEntries :: Connection -> IO ()
+queryPokemonAllEntries conn = do
+    pokiEntries <- queryCandyAllPokemon conn
+    let tot = sum (map fk_candy pokiEntries)
+    putStrLn " "
+    print $ "Total Pokemon : " ++ show(tot) ++ " Types"
