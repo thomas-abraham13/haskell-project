@@ -114,8 +114,3 @@ queryCandyAllPokemon conn = do
     let sql = "SELECT name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
     query conn sql [candyName]
 
--- queryCountryTotalCases :: Connection -> IO ()
--- queryCountryTotalCases conn = do
---     countryEntries <- queryCountryAllEntries conn
---     let total = sum (map cases countryEntries)
---     print $ "Total entries: " ++ show(total)

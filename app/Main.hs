@@ -9,7 +9,6 @@ import Database
 main :: IO ()
 main = do
     putStrLn "                                   "
-    putStrLn "                                   "
     putStrLn "-----------------------------------"
     putStrLn " FIRST GENERATION POKEMON POKEDEX  "
     putStrLn "           POKEMON DATA            "
@@ -42,7 +41,7 @@ main = do
             print "      Downloading Pokemon Data     "
             json <- download url
             print "           Parsing Data            "
-            case (parseRecords json) of
+            case (parsePokemon json) of
                 Left err -> print err
                 Right poke -> do
                     print "         Saving on Database        "
@@ -51,7 +50,6 @@ main = do
                     main
         2 -> do
             entries <- queryCandyAllPokemon conn
-            print "Queried"
             mapM_ print entries
             main
 
@@ -59,13 +57,6 @@ main = do
             print "------------------------------------------"
             print "  FIRST GENERATION POKEMON GAMES POKEDEX  "
             print "------------------------------------------"
-            conn <- someFunc
-            main
-
-        4 -> do
-            print "-----------------------------------"
-            print "         TOTAL PLAYER DATA         "
-            print "-----------------------------------"
             main
 
         otherwise -> do 
