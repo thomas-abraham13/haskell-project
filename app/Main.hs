@@ -20,7 +20,6 @@ import Lib
 --  Inputting "5" will Find Pokemon by asking the user to input the type of Candy. For example, "Charmander Candy" will display a list of pokemon that use Charmander Candy.
 --
 --  Inputting "0" will terminate the application
-
 main :: IO ()
 
 main = do
