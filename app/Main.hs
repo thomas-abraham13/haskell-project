@@ -5,6 +5,7 @@ import Types
 import Fetch
 import Parse
 import Database
+import Lib
 
 -- |The main function provides four different functionalities:
 --
@@ -27,11 +28,11 @@ main = do
     putStrLn "                                   "
     putStrLn "   (1) - Download Pokemon Data     "
     putStrLn "   (2) - Show All Pokemon          "
-    putStrLn "   (3) - Application Information   "
+    putStrLn "   (3) - Total Candy by Pokemon    "
+    putStrLn "   (4) - Application Information   "
     putStrLn "   (0) - Exit Application          "
     putStrLn "                                   "
     putStrLn "-----------------------------------"
-    putStrLn "                                   "
     putStrLn "                                   "
     conn <- initialiseDB
     hSetBuffering stdout NoBuffering
@@ -65,9 +66,11 @@ main = do
             main
 
         3 -> do
-            print "------------------------------------------"
-            print "  FIRST GENERATION POKEMON GAMES POKEDEX  "
-            print "------------------------------------------"
+            queryPokemonAllEntries conn
+            main
+
+        4 -> do
+            conn <- someFunc
             main
 
         otherwise -> do 
