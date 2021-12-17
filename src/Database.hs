@@ -27,11 +27,11 @@ instance FromRow Pokemon where
     fromRow = Pokemon <$> field <*> field <*> field <*> field <*> field <*> field <*> field <*> field
 
 instance FromRow PokemonInfo where
-    fromRow = PokemonInfo <$> field <*> field <*> field <*> field <*> field
+    fromRow = PokemonInfo <$> field <*> field <*> field <*> field <*> field <*> field
 
 instance ToRow PokemonInfo where
-    toRow (PokemonInfo name_ height_ weight_ fk_candy fk_spawn)
-        = toRow (name_, height_, weight_, fk_candy, fk_spawn)
+    toRow (PokemonInfo num_ name_ height_ weight_ fk_candy fk_spawn)
+        = toRow (num_, name_, height_, weight_, fk_candy, fk_spawn)
 
 instance FromRow Candy where
     fromRow = Candy <$> field <*> field
@@ -51,6 +51,7 @@ initialiseDB :: IO Connection
 initialiseDB = do
         conn <- open "pokemonDatabase.sqlite"
         execute_ conn "CREATE TABLE IF NOT EXISTS pokemonInfo (\
+            \number VARCHAR(10) NOT NULL, \ 
             \name VARCHAR(80) NOT NULL, \ 
             \height VARCHAR(80) NOT NULL, \ 
             \weight VARCHAR(80) NOT NULL, \ 
@@ -92,30 +93,18 @@ createPokemonInfo conn pokemon = do
     candy <- getOrCreateCandy conn (candy pokemon)
     spawn <- getOrCreateSpawn conn (spawn_chance pokemon) (avg_spawns pokemon)
     let pokemonInfo = PokemonInfo {
+        num_ = num pokemon,
         name_ = name pokemon,
         height_ = height pokemon,
         weight_ = weight pokemon,
         fk_candy = c_id candy,
         fk_spawn = s_id spawn
     }
-    execute conn "INSERT INTO pokemonInfo VALUES (?,?,?,?,?)" pokemonInfo
+    execute conn "INSERT INTO pokemonInfo VALUES (?,?,?,?,?,?)" pokemonInfo
 
 savePokemonInfo :: Connection -> [Pokemon] -> IO ()
 savePokemonInfo conn = mapM_ (createPokemonInfo conn)
 
--- queryAllPokemons :: Connection -> IO [PokemonInfo]
--- queryAllPokemons conn = do
---     putStrLn "Finding all Pokemons from GEN 1"
---     let sql = "SELECT * from pokemonInfo"
---     query conn sql
-
-queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
-queryCandyAllPokemon conn = do
-    putStr "Enter candy name > "
-    candyName <- getLine
-    putStrLn $ "Looking for " ++ candyName ++ " Pokemon..."
-    let sql = "SELECT name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
-    query conn sql [candyName]
 
 queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
 queryCandyAllPokemon conn = do
