@@ -6,7 +6,6 @@ module Types (
     PokemonInfo (..),
     Candy (..),
     Spawn (..)
-
 ) where
 
 import GHC.Generics
@@ -44,3 +43,4 @@ data Pokemon = Pokemon {
 data Pokemons = Pokemons {
     pokemon :: [Pokemon]
 } deriving(Show, Generic)
+
