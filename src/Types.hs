@@ -12,24 +12,24 @@ import GHC.Generics
 
 data PlayerStats = PlayerStats {
     stats_id :: Int,
-    ast :: Maybe Int,
-    blk :: Maybe Int,
-    dreb :: Maybe Int,
+    ast :: Maybe Float,
+    blk :: Maybe Float,
+    dreb :: Maybe Float,
     fg3_pct :: Maybe Float,
-    fg3a :: Maybe Int,
-    fg3m :: Maybe Int,
+    fg3a :: Maybe Float,
+    fg3m :: Maybe Float,
     fg_pct :: Maybe Float,
-    fga :: Maybe Int,
-    fgm :: Maybe Int,
+    fga :: Maybe Float,
+    fgm :: Maybe Float,
     ft_pct :: Maybe Float,
-    fta :: Maybe Int,
-    ftm :: Maybe Int,
-    oreb :: Maybe Int,
-    pf :: Maybe Int,
-    pts :: Maybe Int,
-    reb :: Maybe Int,
-    stl :: Maybe Int,
-    turnover :: Maybe Int
+    fta :: Maybe Float,
+    ftm :: Maybe Float,
+    oreb :: Maybe Float,
+    pf :: Maybe Float,
+    pts :: Maybe Float,
+    reb :: Maybe Float,
+    stl :: Maybe Float,
+    turnover :: Maybe Float
 } deriving (Show,Generic)
 
 data Game = Game {
@@ -42,8 +42,6 @@ data Game = Game {
 } deriving (Show)
 
 data Player = Player {
-    player_id :: Int,
-    first_name :: String,
     height_feet :: Int,
     height_inches :: Int,
     weight_pounds :: Int,
@@ -53,8 +51,8 @@ data Player = Player {
 } deriving (Show, Generic)
 
 data Team = Team {
-    team_id :: Int,
-    abbreviation :: String,
+    team_id :: String,
+    abbreviation :: String
 } deriving (Show, Generic)
 
 data Data = Data {

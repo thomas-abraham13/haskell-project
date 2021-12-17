@@ -39,7 +39,7 @@ main = do
             print "                        "
 
         1 -> do
-            let url = "https://www.balldontlie.io/api/v1/stats.json"
+            let url = "https://jsonkeeper.com/b/48ZK"
             print "      Downloading Player Data      "
             json <- download url
             print "           Parsing Data            "
