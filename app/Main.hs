@@ -1,27 +1,27 @@
 module Main where
 
 import System.IO
-import Lib
 import Types
 import Fetch
 import Parse
---import Database
+import Database
 
 main :: IO ()
 main = do
     putStrLn "                                   "
     putStrLn "-----------------------------------"
-    putStrLn "  NATIONAL BASKETBALL ASSOCIATION  "
-    putStrLn "            PLAYER DATA            "
+    putStrLn " FIRST GENERATION POKEMON POKEDEX  "
+    putStrLn "           POKEMON DATA            "
     putStrLn "-----------------------------------"
     putStrLn "                                   "
-    putStrLn "   (1) - Download Player Data      "
-    putStrLn "   (2) - Application Information   "
+    putStrLn "   (1) - Download Pokemon Data     "
+    putStrLn "   (2) - Show All Pokemon          "
+    putStrLn "   (3) - Application Information   "
     putStrLn "   (0) - Exit Application          "
     putStrLn "                                   "
     putStrLn "-----------------------------------"
     putStrLn "                                   "
-    --conn <- initialiseDB
+    conn <- initialiseDB
     hSetBuffering stdout NoBuffering
     putStr " Enter Choice : "
     option <- readLn :: IO Int
@@ -36,22 +36,27 @@ main = do
             print "                        "
 
         1 -> do
-            let url = "https://www.balldontlie.io/api/v1/stats.json"
+            -- let url = "https://www.balldontlie.io/api/v1/stats.json"
+            let url = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
             print "      Downloading Player Data      "
             json <- download url
             print "           Parsing Data            "
             case (parseRecords json) of
                 Left err -> print err
-                Right recs -> do
+                Right poke -> do
                     print "         Saving on Database        "
-            --        saveRecords conn (records recs)
+                    savePokemonInfo conn (pokemon poke)
                     print "             Data Saved            "
-            main
-
+                    main
         2 -> do
-            print "-----------------------------------"
-            print "  NATIONAL BASKETBALL ASSOCIATION  "
-            print "-----------------------------------"
+            entries <- queryCandyAllPokemon conn
+            print "Queried"
+            mapM_ print entries
+            main
+        3 -> do
+            print "------------------------------------------"
+            print "  FIRST GENERATION POKEMON GAMES POKEDEX  "
+            print "------------------------------------------"
             --conn <- someFunc
             main
 

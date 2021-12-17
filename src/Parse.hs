@@ -14,38 +14,46 @@ import qualified Data.ByteString.Lazy.Char8 as T
 --renameFields "full_name" = "full_name"
 --renameFields "name" = "name"
 
-renameFields "data1" = "data"
-renameFields "stats_id" = "id"
-renameFields "ast" = "ast"
-renameFields "blk" = "blk"
-renameFields "dreb" = "dreb"
-renameFields "fg3_pct" = "fg3_pct"
-renameFields "fg3a" = "fg3a"
-renameFields "fg3m" = "fg3m"
-renameFields "fg_pct" = "fg_pct"
-renameFields "fga" = "fga"
-renameFields "fgm" = "fgm"
-renameFields "ft_pct" = "ft_pct"
-renameFields "fta" = "fta"
-renameFields "ftm" = "ftm"
-renameFields "oreb" = "oreb"
-renameFields "pf" = "pf"
-renameFields "pts" = "pts"
-renameFields "reb" = "reb"
-renameFields "stl" = "stl"
-renameFields "turnover" = "turnover"
-renameFields other = other
+-- renameFields "data1" = "data"
+-- renameFields "stats_id" = "id"
+-- renameFields "ast" = "ast"
+-- renameFields "blk" = "blk"
+-- renameFields "dreb" = "dreb"
+-- renameFields "fg3_pct" = "fg3_pct"
+-- renameFields "fg3a" = "fg3a"
+-- renameFields "fg3m" = "fg3m"
+-- renameFields "fg_pct" = "fg_pct"
+-- renameFields "fga" = "fga"
+-- renameFields "fgm" = "fgm"
+-- renameFields "ft_pct" = "ft_pct"
+-- renameFields "fta" = "fta"
+-- renameFields "ftm" = "ftm"
+-- renameFields "oreb" = "oreb"
+-- renameFields "pf" = "pf"
+-- renameFields "pts" = "pts"
+-- renameFields "reb" = "reb"
+-- renameFields "stl" = "stl"
+-- renameFields "turnover" = "turnover"
+-- renameFields other = other
 
-customOptions = defaultOptions {
-    fieldLabelModifier = renameFields
-}
+-- customOptions = defaultOptions {
+--     fieldLabelModifier = renameFields
+-- }
 
-instance FromJSON PlayerStats where
-    parseJSON = genericParseJSON customOptions
+-- instance FromJSON PlayerStats where
+--     parseJSON = genericParseJSON customOptions
 
-instance FromJSON Data where
-    parseJSON = genericParseJSON customOptions
+-- instance FromJSON Data where
+--     parseJSON = genericParseJSON customOptions
 
+-- instance FromJSON PlayerP
 
-parseRecords :: T.ByteString -> Either String Data
-parseRecords json = eitherDecode json :: Either String Data
+-- instance FromJSON TeamP
+
+instance FromJSON Pokemons
+
+instance FromJSON Pokemon
+        
+
+parseRecords :: T.ByteString -> Either String Pokemons
+parseRecords json = eitherDecode json :: Either String Pokemons
