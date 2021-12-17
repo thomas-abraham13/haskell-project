@@ -6,7 +6,18 @@ import Fetch
 import Parse
 import Database
 
+-- |The main function provides four different functionalities:
+--
+--  Inputting "1" will download the pokemon data into an sqlite file, this must be done before trying any of the other functionalities.
+--
+--  Inputting "2" will Show All Pokemon by asking the user to input the type of Candy. For example, "Charmander Candy" will display a list of pokemon that use Charmander Candy.
+--
+--  Inputting "3" will display an overview of what the application does
+--
+--  Inputting "4" will exit the application
+
 main :: IO ()
+
 main = do
     putStrLn "                                   "
     putStrLn "-----------------------------------"

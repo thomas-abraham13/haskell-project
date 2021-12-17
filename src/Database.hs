@@ -3,6 +3,7 @@
 -- or, on GHCI:
 -- > :set -XOverloadedStrings
 
+-- |Module Database that contains functions
 module Database (
     initialiseDB,
     savePokemonInfo,
@@ -44,6 +45,7 @@ instance ToRow Spawn where
     toRow (Spawn s_id spawn_chance_ avg_spawns_)
         = toRow (s_id, spawn_chance_, avg_spawns_)
 
+-- |Method to create the database pokemonDatabase.sqlite
 initialiseDB :: IO Connection
 initialiseDB = do
         conn <- open "pokemonDatabase.sqlite"

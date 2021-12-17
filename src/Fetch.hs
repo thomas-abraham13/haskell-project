@@ -1,3 +1,4 @@
+-- |Module that performs http request
 module Fetch (
     download
 ) where
