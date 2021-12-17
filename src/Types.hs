@@ -27,7 +27,7 @@ data Candy = Candy {
 data Spawn = Spawn {
     s_id :: Int,
     spawn_chance_ :: Float,
-    avg_spawns_ :: Float
+    avg_spawns_per_10000 :: Float
 }deriving(Show)
 
 data Pokemon = Pokemon {

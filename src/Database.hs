@@ -44,8 +44,8 @@ instance FromRow Spawn where
     fromRow = Spawn <$> field <*> field <*> field
 
 instance ToRow Spawn where
-    toRow (Spawn s_id spawn_chance_ avg_spawns_)
-        = toRow (s_id, spawn_chance_, avg_spawns_)
+    toRow (Spawn s_id spawn_chance_ avg_spawns_per_10000)
+        = toRow (s_id, spawn_chance_, avg_spawns_per_10000)
 
 initialiseDB :: IO Connection
 initialiseDB = do
@@ -65,7 +65,7 @@ initialiseDB = do
         execute_ conn "CREATE TABLE IF NOT EXISTS spawns (\
             \id INTEGER PRIMARY KEY AUTOINCREMENT,\
             \spawn_chance FLOAT DEFAULT NULL, \ 
-            \avg_spawns FLOAT DEFAULT NULL \ 
+            \avg_spawns_per_10000 FLOAT DEFAULT NULL \ 
             \)"
         
         return conn
@@ -85,7 +85,7 @@ getOrCreateSpawn conn spawn_chance avg_spawns = do
     if length results > 0 then
         return . head $ results
     else do
-        execute conn "INSERT INTO spawns (spawn_chance, avg_spawns) VALUES (?,?)" (spawn_chance, avg_spawns)
+        execute conn "INSERT INTO spawns (spawn_chance, avg_spawns_per_10000) VALUES (?,?)" (spawn_chance, avg_spawns)
         getOrCreateSpawn conn spawn_chance avg_spawns
 
 createPokemonInfo :: Connection -> Pokemon -> IO ()
@@ -106,12 +106,13 @@ savePokemonInfo :: Connection -> [Pokemon] -> IO ()
 savePokemonInfo conn = mapM_ (createPokemonInfo conn)
 
 
+
 queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
 queryCandyAllPokemon conn = do
     putStr "Enter candy name > "
     candyName <- getLine
     putStrLn $ "Looking for " ++ candyName ++ " Pokemon..."
-    let sql = "SELECT name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
+    let sql = "SELECT number, name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
     query conn sql [candyName]
 
 getPokemons :: Connection -> IO [PokemonInfo]
@@ -125,3 +126,4 @@ getCandy conn = do
 getSpawn :: Connection -> IO [Spawn]
 getSpawn conn = do
     query_ conn "SELECT * FROM spawns"
+
