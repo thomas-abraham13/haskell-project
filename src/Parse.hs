@@ -12,5 +12,5 @@ instance FromJSON Pokemons
 instance FromJSON Pokemon
         
 
-parseRecords :: T.ByteString -> Either String Pokemons
-parseRecords json = eitherDecode json :: Either String Pokemons
+parsePokemon :: T.ByteString -> Either String Pokemons
+parsePokemon json = eitherDecode json :: Either String Pokemons

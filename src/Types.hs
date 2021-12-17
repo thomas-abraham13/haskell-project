@@ -1,14 +1,6 @@
 {-# LANGUAGE DeriveGeneric #-}
 
 module Types (
-    -- PlayerStats (..),
-    -- PlayerStat (..),
-    -- Game (..),
-    -- Player (..),
-    -- Team (..),
-    -- PlayerP (..),
-    -- TeamP (..),
-    -- Data (..)
     Pokemon (..),
     Pokemons (..),
     PokemonInfo (..),

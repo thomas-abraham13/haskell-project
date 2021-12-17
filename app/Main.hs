@@ -36,12 +36,11 @@ main = do
             print "                        "
 
         1 -> do
-            -- let url = "https://www.balldontlie.io/api/v1/stats.json"
             let url = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
             print "      Downloading Player Data      "
             json <- download url
             print "           Parsing Data            "
-            case (parseRecords json) of
+            case (parsePokemon json) of
                 Left err -> print err
                 Right poke -> do
                     print "         Saving on Database        "
@@ -50,14 +49,12 @@ main = do
                     main
         2 -> do
             entries <- queryCandyAllPokemon conn
-            print "Queried"
             mapM_ print entries
             main
         3 -> do
             print "------------------------------------------"
             print "  FIRST GENERATION POKEMON GAMES POKEDEX  "
             print "------------------------------------------"
-            --conn <- someFunc
             main
 
         otherwise -> do 
