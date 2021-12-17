@@ -1,5 +1,5 @@
 module Parse (
-    parseRecords,
+    parsePokemon,
 ) where
 
 import Types
