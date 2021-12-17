@@ -8,7 +8,9 @@ module Database (
     savePokemonInfo,
     getOrCreateSpawn,
     queryCandyAllPokemon,
---    queryPokemonAllEntries
+    getPokemons,
+    getCandy,
+    getSpawn
 ) where
 
 import Types
@@ -101,25 +103,36 @@ createPokemonInfo conn pokemon = do
 savePokemonInfo :: Connection -> [Pokemon] -> IO ()
 savePokemonInfo conn = mapM_ (createPokemonInfo conn)
 
+-- queryAllPokemons :: Connection -> IO [PokemonInfo]
+-- queryAllPokemons conn = do
+--     putStrLn "Finding all Pokemons from GEN 1"
+--     let sql = "SELECT * from pokemonInfo"
+--     query conn sql
+
 queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
 queryCandyAllPokemon conn = do
-    putStr " "
-    putStr " Enter Name of Candy : "
+    putStr "Enter candy name > "
     candyName <- getLine
-    putStrLn $ " Searching for " ++ candyName ++ " Pokemon.... "
-    putStr " "
+    putStrLn $ "Looking for " ++ candyName ++ " Pokemon..."
     let sql = "SELECT name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
     query conn sql [candyName]
 
---queryPokemonAllEntries :: Connection -> IO ()
---queryPokemonAllEntries conn = do
---    pokiEntries <- queryCandyAllPokemon conn
----    let tot = sum (map fk_candy pokiEntries)
---    putStrLn " "
---    print $ "Total Pokemon : " ++ show(tot) ++ " Types"
+queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
+queryCandyAllPokemon conn = do
+    putStr "Enter candy name > "
+    candyName <- getLine
+    putStrLn $ "Looking for " ++ candyName ++ " Pokemon..."
+    let sql = "SELECT name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
+    query conn sql [candyName]
 
---queryAllPokemons :: Connection -> IO [PokemonInfo]
---queryAllPokemons conn = do
---    putStrLn " "
---    let sql = "SELECT * FROM pokemonInfo"
---    query conn sql 
+getPokemons :: Connection -> IO [PokemonInfo]
+getPokemons conn = do
+    query_ conn "SELECT * FROM pokemonInfo"
+
+getCandy :: Connection -> IO [Candy]
+getCandy conn = do
+    query_ conn "SELECT * FROM candies"
+
+getSpawn :: Connection -> IO [Spawn]
+getSpawn conn = do
+    query_ conn "SELECT * FROM spawns"
