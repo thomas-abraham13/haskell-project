@@ -5,6 +5,7 @@ import Types
 import Fetch
 import Parse
 import Database
+import Lib
 
 main :: IO ()
 main = do
@@ -20,7 +21,6 @@ main = do
     putStrLn "   (0) - Exit Application          "
     putStrLn "                                   "
     putStrLn "-----------------------------------"
-    putStrLn "                                   "
     putStrLn "                                   "
     conn <- initialiseDB
     hSetBuffering stdout NoBuffering
@@ -57,6 +57,7 @@ main = do
             print "------------------------------------------"
             print "  FIRST GENERATION POKEMON GAMES POKEDEX  "
             print "------------------------------------------"
+            conn <- someFunc
             main
 
         otherwise -> do 
