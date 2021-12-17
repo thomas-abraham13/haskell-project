@@ -54,9 +54,6 @@ main = do
             main
 
         3 -> do
-            print "------------------------------------------"
-            print "  FIRST GENERATION POKEMON GAMES POKEDEX  "
-            print "------------------------------------------"
             conn <- someFunc
             main
 
