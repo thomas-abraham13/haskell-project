@@ -42,8 +42,5 @@ data Pokemon = Pokemon {
 
 data Pokemons = Pokemons {
     pokemon :: [Pokemon]
-<<<<<<< HEAD
 } deriving(Show, Generic)
-=======
-} deriving(Show, Generic)
->>>>>>> 5db73b3b790700a6402fa4816643185f4cae42b4
+
