@@ -108,9 +108,9 @@ savePokemonInfo conn = mapM_ (createPokemonInfo conn)
 
 queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
 queryCandyAllPokemon conn = do
-    putStr "Enter candy name > "
+    putStr " Enter Name of Candy : "
     candyName <- getLine
-    putStrLn $ "Looking for " ++ candyName ++ " Pokemon..."
+    putStrLn $ " Searching for " ++ candyName ++ " Pokemon.... "
     let sql = "SELECT name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
     query conn sql [candyName]
 
