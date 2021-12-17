@@ -28,8 +28,9 @@ main = do
     putStrLn "                                   "
     putStrLn "   (1) - Download Pokemon Data     "
     putStrLn "   (2) - Show All Pokemon          "
-    putStrLn "   (3) - Total Candy by Pokemon    "
-    putStrLn "   (4) - Application Information   "
+    putStrLn "   (3) - Show All Pokemon Candy    "
+    putStrLn "   (4) - Show All Spawn Rates      "
+    putStrLn "   (5) - Find Pokemon By Candy     "
     putStrLn "   (0) - Exit Application          "
     putStrLn "                                   "
     putStrLn "-----------------------------------"
@@ -61,19 +62,22 @@ main = do
                     print "             Data Saved            "
                     main
         2 -> do
+            pokemons <- getPokemons conn
+            mapM_ print pokemons
+            main
+        3 -> do
+            candy <- getCandy conn
+            mapM_ print candy
+            main
+        4 -> do
+            spawn <- getSpawn conn
+            mapM_ print spawn
+            main
+        5 -> do
             entries <- queryCandyAllPokemon conn
             mapM_ print entries
             main
-
-        3 -> do
-            --queryPokemonAllEntries conn
-            main
-
-        4 -> do
-            conn <- someFunc
-            main
-
-        otherwise -> do 
+        _ -> do 
                     print "                        "
                     print "     Invalid Option     "
                     print "                        "

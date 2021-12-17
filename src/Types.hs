@@ -11,6 +11,7 @@ module Types (
 import GHC.Generics
 
 data PokemonInfo = PokemonInfo {
+    num_ :: String,
     name_ :: String,
     height_ :: String,
     weight_ :: String,
