@@ -9,7 +9,7 @@ module Database (
     savePokemonInfo,
     getOrCreateSpawn,
     queryCandyAllPokemon,
-    queryPokemonAllEntries
+--    queryPokemonAllEntries
 ) where
 
 import Types
@@ -103,12 +103,6 @@ createPokemonInfo conn pokemon = do
 savePokemonInfo :: Connection -> [Pokemon] -> IO ()
 savePokemonInfo conn = mapM_ (createPokemonInfo conn)
 
--- queryAllPokemons :: Connection -> IO [PokemonInfo]
--- queryAllPokemons conn = do
---     putStrLn "Finding all Pokemons from GEN 1"
---     let sql = "SELECT * from pokemonInfo"
---     query conn sql
-
 queryCandyAllPokemon :: Connection -> IO [PokemonInfo]
 queryCandyAllPokemon conn = do
     putStr " "
@@ -119,9 +113,15 @@ queryCandyAllPokemon conn = do
     let sql = "SELECT name, height, weight, fk_candy, fk_spawn FROM pokemonInfo inner join candies on pokemonInfo.fk_candy == candies.id WHERE candyType=?"
     query conn sql [candyName]
 
-queryPokemonAllEntries :: Connection -> IO ()
-queryPokemonAllEntries conn = do
-    pokiEntries <- queryCandyAllPokemon conn
-    let tot = sum (map fk_candy pokiEntries)
-    putStrLn " "
-    print $ "Total Pokemon : " ++ show(tot) ++ " Types"
+--queryPokemonAllEntries :: Connection -> IO ()
+--queryPokemonAllEntries conn = do
+--    pokiEntries <- queryCandyAllPokemon conn
+---    let tot = sum (map fk_candy pokiEntries)
+--    putStrLn " "
+--    print $ "Total Pokemon : " ++ show(tot) ++ " Types"
+
+--queryAllPokemons :: Connection -> IO [PokemonInfo]
+--queryAllPokemons conn = do
+--    putStrLn " "
+--    let sql = "SELECT * FROM pokemonInfo"
+--    query conn sql 

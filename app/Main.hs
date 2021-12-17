@@ -66,7 +66,7 @@ main = do
             main
 
         3 -> do
-            queryPokemonAllEntries conn
+            --queryPokemonAllEntries conn
             main
 
         4 -> do
